@@ -1,0 +1,30 @@
+html {
+  background: url(/img/shop1.jpg) no-repeat center;
+  touch-action: manipulation;
+}
+
+html, body {
+  background: rgb(39, 43, 56);
+  font-family: sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.bg-image {
+  background: url(/img/shop1.jpg) no-repeat center;
+  opacity: 0.2;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+#root {
+  height: 100%;
+}

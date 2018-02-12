@@ -1,0 +1,32 @@
+.time-block > div {
+    display: flex;
+}
+
+.time-block > div > .time {
+    align-items: center;
+    display: flex;
+    font-size: 200%;
+    height: 50px;
+    padding: 1rem;
+    width: 100px;
+}
+
+.time-block > div:nth-child(2) > .time {
+    font-size: 100%;
+    opacity: .2;
+}
+
+.time-block > div > .reservation {
+    border-bottom: solid grey;
+}
+
+.time-block > div:first-child .reservation {
+    width: 350px;
+}
+.time-block > div:nth-child(2) .reservation {
+    width: 300px;
+}
+
+.time-slot-row {
+    margin: 1rem 0;
+}

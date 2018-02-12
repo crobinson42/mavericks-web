@@ -1,0 +1,37 @@
+._loading-overlay {
+  height: 100%;
+}
+
+.curser {
+  cursor: pointer;
+}
+
+div.inline {
+  display: inline-block;
+}
+
+.modal {
+  display: block!important;
+}
+
+/* used with modals */
+div.overlay {
+  background-color: grey;
+  height: 100%;
+  left: 0;
+  opacity: .2;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.scene-container {
+  margin-bottom: 3rem;
+  margin-bottom: 3rem;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+}
+.scene-container > .schedule {
+  overflow: scroll;
+}

@@ -1,0 +1,11 @@
+.btn-stylist {
+    cursor: pointer;
+    font-size: 150%;
+    height: 50px;
+    text-align: center;
+    width: 100%;
+}
+
+.btn-stylist.active {
+    border-bottom: 3px solid white;
+}
