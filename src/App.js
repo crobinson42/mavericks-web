@@ -4,7 +4,7 @@ import { compose } from 'recompose'
 import Loadable from 'react-loading-overlay'
 import initReactFastclick from 'react-fastclick'
 
-import firebase, { handleAuthentication } from './db/firebase'
+import { handleAuthentication } from './db/firebase'
 import { fetchAndStreamAppointments } from 'db/appointments'
 import { fetchAndStreamAvailability } from 'db/stylist_availability'
 import state from 'state'
@@ -24,8 +24,6 @@ class App extends Component {
     this.props.effects.setAuthenticationLoading(false)
 
     if (!user) {
-      // todo: remove
-      alert('setUserAndAuthentication() NO USER')
       return this.props.effects.setLoading(false)
     }
 

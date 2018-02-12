@@ -16,16 +16,7 @@ class Login extends Component {
   handleSignIn = provider => () => {
     this.props.effects.setLoading()
 
-    firebase.auth().signInWithRedirect(providers[provider]).then(result => {
-      // todo: remove
-      alert('redirect then()')
-
-      console.log('result', result, result.user)
-    })
-
-    firebase.auth().getRedirectResult().then(result => {
-      console.log('result', result, result.user)
-    })
+    firebase.auth().signInWithPopup(providers[provider])
   }
 
   render() {
