@@ -16,7 +16,16 @@ class Login extends Component {
   handleSignIn = provider => () => {
     this.props.effects.setLoading()
 
-    firebase.auth().signInWithRedirect(providers[provider])
+    firebase.auth().signInWithRedirect(providers[provider]).then(result => {
+      // todo: remove
+      alert('redirect then()')
+
+      console.log('result', result, result.user)
+    })
+
+    firebase.auth().getRedirectResult().then(result => {
+      console.log('result', result, result.user)
+    })
   }
 
   render() {
@@ -57,6 +66,10 @@ class Login extends Component {
             onClick={this.handleSignIn('google')}
           />
         </div>
+
+        <span className="text-small text-muted" style={{ bottom: 0, left: 0, position: 'fixed' }}>
+          {process.env.REACT_APP_VERSION}
+        </span>
       </div>
     )
   }

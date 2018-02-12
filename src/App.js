@@ -4,7 +4,7 @@ import { compose } from 'recompose'
 import Loadable from 'react-loading-overlay'
 import initReactFastclick from 'react-fastclick'
 
-import firebase from './db/firebase'
+import firebase, { handleAuthentication } from './db/firebase'
 import { fetchAndStreamAppointments } from 'db/appointments'
 import { fetchAndStreamAvailability } from 'db/stylist_availability'
 import state from 'state'
@@ -17,23 +17,27 @@ initReactFastclick()
 
 class App extends Component {
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      this.props.effects.setAuthenticationLoading(false)
+    handleAuthentication(this.authStateChangeHandler)
+  }
 
-      if (!user) {
-        return this.props.effects.setLoading(false)
-      }
+  authStateChangeHandler = user => {
+    this.props.effects.setAuthenticationLoading(false)
 
-      this.props.effects.setUser({
-        email: user.email,
-        id: user.uid,
-        name: user.displayName,
-        phone: user.phoneNumber,
-      })
+    if (!user) {
+      // todo: remove
+      alert('setUserAndAuthentication() NO USER')
+      return this.props.effects.setLoading(false)
+    }
 
-      fetchAndStreamAppointments(this.appointmentsStreamHandler)
-      fetchAndStreamAvailability(this.availabilityStreamHandler)
+    this.props.effects.setUser({
+      email: user.email,
+      id: user.uid,
+      name: user.displayName,
+      phone: user.phoneNumber,
     })
+
+    fetchAndStreamAppointments(this.appointmentsStreamHandler)
+    fetchAndStreamAvailability(this.availabilityStreamHandler)
   }
 
   appointmentsStreamHandler = appts => {

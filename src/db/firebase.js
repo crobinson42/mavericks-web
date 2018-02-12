@@ -9,13 +9,23 @@ const config = {
 }
 
 firebase.initializeApp(config)
-firebase.auth()
 firebase.storage()
 firebase.database()
 
 window.firebase = firebase
 
 export const db = firebase.database()
+
+export const handleAuthentication = authStateChangedHandler => {
+  firebase.auth().getRedirectResult().then((result) => {
+    if (result.user)
+      authStateChangedHandler(result.user)
+  })
+
+  firebase.auth().onAuthStateChanged(user => {
+    authStateChangedHandler(user)
+  })
+}
 
 export const providers = {
   google: new firebase.auth.GoogleAuthProvider(),
