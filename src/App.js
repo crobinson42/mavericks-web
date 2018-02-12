@@ -7,7 +7,6 @@ import initReactFastclick from 'react-fastclick'
 import firebase from './db/firebase'
 import { fetchAndStreamAppointments } from 'db/appointments'
 import { fetchAndStreamAvailability } from 'db/stylist_availability'
-// import { getDayOfWeek } from 'utils/date'
 import state from 'state'
 
 import Scene from 'scenes'
