@@ -31,7 +31,7 @@ class Login extends Component {
           />
 
           <div>
-            <p>Open Mon-Fri 9-6pm, Sat 9-5pm</p>
+            <p>Open Mon-Fri 10-6pm, Sat 10-3pm</p>
             <p>418 E. Lakeside, Coeur d’Alene, Id</p>
           </div>
 
