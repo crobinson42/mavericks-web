@@ -12,6 +12,10 @@ class TimeSlots extends React.Component {
     hours: []
   }
 
+  componentDidMount() {
+    this.updateHours()
+  }
+
   componentDidUpdate(prevProps, prevState, prevContext) {
     if (prevProps.start !== this.props.start || prevProps.end !== this.props.end)
       this.updateHours()
@@ -42,7 +46,9 @@ class TimeSlots extends React.Component {
 
     return this.state.hours.map(hour => {
       const time = DateTime.fromObject({ hour }).toFormat('h')
+      const timeObject = DateTime.fromObject({ hour })
       const timeHalf = DateTime.fromObject({ hour, minutes: 30 }).toFormat('h:mm')
+      const timeHalfObject = DateTime.fromObject({ hour, minutes: 30 })
 
       return (
         <div className="time-block" key={time}>
@@ -54,7 +60,7 @@ class TimeSlots extends React.Component {
               </span>
             </div>
 
-            <Reservation stylist={this.props.stylist} time={DateTime.fromObject({ hour }).toFormat('h:mm')} />
+            <Reservation stylist={this.props.stylist} time={DateTime.fromObject({ hour }).toFormat('h:mm')} timeObject={timeObject} />
           </div>
 
           <div className="d-flex time-slot-row">
@@ -62,7 +68,7 @@ class TimeSlots extends React.Component {
               {timeHalf}
             </div>
 
-            <Reservation stylist={this.props.stylist} time={timeHalf} />
+            <Reservation stylist={this.props.stylist} time={timeHalf} timeObject={timeHalfObject} />
           </div>
         </div>
       )

@@ -3,6 +3,7 @@ import { injectState } from 'freactal'
 
 import { getDayOfWeek } from 'utils/date'
 
+import Lodable from 'react-loading-overlay'
 import Footer from 'components/Footer'
 import logo from 'images/logo.png'
 import StylistButtons from 'components/StylistButtons'
@@ -11,9 +12,20 @@ import TimeSlots from 'components/TimeSlots'
 class Customer extends React.Component {
   state = {
     active: 'mike',
+    loading: false,
+  }
+
+  componentDidMount() {
+    setInterval(() => {
+      this.setState({ loading: true })
+      setTimeout(() => this.setState({ loading: false }), 1000)
+    }, 15 * 60000)
   }
 
   render() {
+    if (this.state.loading)
+      return <Lodable active spinner text="Updating..." />
+    
     const appointments =
       this.props.state.appointments &&
       this.props.state.appointments[this.state.active]
