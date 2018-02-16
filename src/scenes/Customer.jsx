@@ -8,6 +8,9 @@ import Footer from 'components/Footer'
 import logo from 'images/logo.png'
 import StylistButtons from 'components/StylistButtons'
 import TimeSlots from 'components/TimeSlots'
+import { UDT } from 'utils/date'
+
+import './Customer.css'
 
 class Customer extends React.Component {
   state = {
@@ -23,9 +26,8 @@ class Customer extends React.Component {
   }
 
   render() {
-    if (this.state.loading)
-      return <Lodable active spinner text="Updating..." />
-    
+    if (this.state.loading) return <Lodable active spinner text="Updating..." />
+
     const appointments =
       this.props.state.appointments &&
       this.props.state.appointments[this.state.active]
@@ -38,18 +40,29 @@ class Customer extends React.Component {
     const availabilityEnd = stylistAvailability.end
     const availabilityStart = stylistAvailability.start
 
+    const humanDate = UDT(this.props.state.date).toFormat('cccc LLL d')
+
     return (
       <div className="scene-container d-flex flex-column">
-        <div className="">
-          <div className="col-md-6 mx-auto text-center">
+        <div className="mx-auto text-center">
+          <div className="logo-container">
             <img
               alt=""
-              className="d-inline-flex"
               src={logo}
-              style={{ maxWidth: '120px', margin: '1rem' }}
+              style={{ maxHeight: '100px', marginTop: '.5rem' }}
             />
-            <h1 className="d-inline-flex">Maverick's</h1>
           </div>
+
+          <span>
+            <div className="brand-name">Maverick's</div>
+            <div className="text-small text-muted">
+              <em>
+                Claim the chair for today,
+                {' '}
+                {humanDate}
+              </em>
+            </div>
+          </span>
         </div>
 
         <div className="">
@@ -59,15 +72,13 @@ class Customer extends React.Component {
           />
         </div>
 
-        <div className="schedule">
-          <div className="col-11 offset-xs-1 col-sm-8 col-md-6 col-lg-5 offset-md-2 mx-auto">
-            <TimeSlots
-              appointments={appointments}
-              end={availabilityEnd}
-              stylist={this.state.active}
-              start={availabilityStart}
-            />
-          </div>
+        <div className="schedule mx-auto">
+          <TimeSlots
+            appointments={appointments}
+            end={availabilityEnd}
+            stylist={this.state.active}
+            start={availabilityStart}
+          />
         </div>
 
         <Footer />

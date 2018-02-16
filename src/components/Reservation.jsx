@@ -16,7 +16,7 @@ const Reservation = ({ reservation, state, stylist, time, timeObject }) => {
     reservationSlot = <AvailableReservation stylist={stylist} time={time} />
 
   return (
-    <div className="align-items-center d-flex flex-column justify-content-center reservation">
+    <div className="align-items-start d-flex flex-column justify-content-center reservation">
       {reservationSlot}
     </div>
   )

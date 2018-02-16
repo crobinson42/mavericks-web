@@ -59,20 +59,24 @@
     -->
 
     <script>
-      // At midnight, reload the page since it can persist if it's opened
-      // as a PWA in the background
-      var milliNow = new Date().getTime()
-      var midnight = new Date()
-      midnight.setHours(23)
-      midnight.setMinutes(59)
-      midnight.setSeconds(59)
+      try {
+        // At midnight, reload the page since it can persist if it's opened
+        // as a PWA in the background
+        var milliNow = new Date().getTime()
+        var midnight = new Date()
+        midnight.setHours(23)
+        midnight.setMinutes(59)
+        midnight.setSeconds(59)
 
-      // add 5 minutes for padding in case client time is slightly offset
-      var milliUntilMidnight = (midnight.getTime() - milliNow) + (5 * 60000)
+        // add 5 minutes for padding in case client time is slightly offset
+        var milliUntilMidnight = (midnight.getTime() - milliNow) + (5 * 60000)
 
-      setTimeout(() => {
-        window.location.reload()
-      }, milliUntilMidnight)
+        setTimeout(function () {
+          window.location.reload()
+        }, milliUntilMidnight)
+      } catch (e) {
+        Raven.captureException(e)
+      }
     </script>
   </body>
 </html>

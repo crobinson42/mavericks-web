@@ -31,7 +31,7 @@ class Footer extends React.Component {
       <div>
         <div className="footer">
           <div className="row">
-            <div className="m-3 mx-auto">
+            <div className="m-2 mx-auto">
               <a
                 className="curser"
                 onClick={() => {

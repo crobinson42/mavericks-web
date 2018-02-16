@@ -5,7 +5,7 @@ import { setAppointment } from 'db/appointments'
 
 const AvailableReservation = ({ state, stylist, time }) => {
   return (
-    <div>
+    <div className="text-center w-100">
       <span
         className={`curser ${state.isAdmin ? '' : 'text-muted'}`}
         onClick={() =>
