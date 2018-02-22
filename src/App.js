@@ -3,6 +3,7 @@ import { injectState, provideState } from 'freactal'
 import { compose } from 'recompose'
 import Loadable from 'react-loading-overlay'
 import initReactFastclick from 'react-fastclick'
+import { detect } from 'detect-browser'
 
 import { handleAuthentication } from './db/firebase'
 import { fetchAndStreamAppointments } from 'db/appointments'
@@ -14,6 +15,19 @@ import Scene from 'scenes'
 import './App.css'
 
 initReactFastclick()
+
+const browser = detect()
+
+switch (browser && browser.name) {
+  case 'ie':
+  case 'opera':
+    alert(
+      'Sorry, you need to use a supported browser. Use Firefox, Safari, or Chrome',
+    )
+    break
+  default:
+    console.info('browser:', browser.name)
+}
 
 class App extends Component {
   componentDidMount() {

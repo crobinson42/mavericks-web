@@ -1,10 +1,9 @@
 import React from 'react'
 import { injectState } from 'freactal'
+import swal from 'sweetalert'
 
 import { removeAppointment } from 'db/appointments'
 import { fetchAndStreamUserById } from 'db/users'
-
-import CustomerAppointment from 'components/Modals/CustomerAppointment'
 
 class ReservationName extends React.Component {
   state = {
@@ -13,7 +12,6 @@ class ReservationName extends React.Component {
     isThisUser: false,
     name: '',
     phone: '',
-    showReservationModal: false,
   }
 
   componentDidMount() {
@@ -31,15 +29,24 @@ class ReservationName extends React.Component {
 
   clickHandler = () => {
     if (!this.state.isThisUser && !this.props.state.isAdmin) return null
+    // don't let a user see this modal if the appt is in the past
+    else if (this.state.isThisUser && this.props.timeObject.valueOf() < new Date().getTime()) return null
 
-    this.setState({
-      showReservationModal: true,
-    })
-  }
-
-  closeReservationModal = e => {
-    this.setState({
-      showReservationModal: false,
+    swal({
+      buttons: {
+        confirm: "I'll be there!",
+        cancelAppt: {
+          text: "Cancel Appointment",
+          value: "cancel",
+        },
+      },
+    }).then(value => {
+      switch (value) {
+        case 'cancel':
+          return this.deleteReservation()
+        default:
+          return null
+      }
     })
   }
 
@@ -70,17 +77,11 @@ class ReservationName extends React.Component {
           <div className="inline">
             <div>{this.state.name}</div>
 
-            {this.props.state.isAdmin && <div>{this.state.phone || this.state.email}</div>}
+            {this.props.state.isAdmin && (
+              <div>{this.state.phone || this.state.email}</div>
+            )}
           </div>
         </div>
-
-        {this.state.showReservationModal &&
-          (this.props.state.isAdmin || this.state.isThisUser) && (
-            <CustomerAppointment
-              closeHandler={this.closeReservationModal}
-              deleteReservation={this.deleteReservation}
-            />
-          )}
       </div>
     )
   }

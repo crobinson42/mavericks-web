@@ -1,7 +1,13 @@
 import React from 'react'
 import { injectState } from 'freactal'
+import swal from 'sweetalert'
 
 import { setAppointment } from 'db/appointments'
+
+const setAppointmentHandler = params => {
+  setAppointment(params)
+  swal("Nice! See you then.")
+}
 
 const AvailableReservation = ({ state, stylist, time }) => {
   return (
@@ -10,15 +16,11 @@ const AvailableReservation = ({ state, stylist, time }) => {
         className={`curser ${state.isAdmin ? '' : 'text-muted'}`}
         onClick={() =>
           state.isAdmin
-            ? setAppointment({ stylist, time, userId: state.user.id })
-            : setAppointment({ stylist, time, userId: state.user.id })
+            ? setAppointmentHandler({ stylist, time, userId: state.user.id })
+            : setAppointmentHandler({ stylist, time, userId: state.user.id })
         }
       >
-        {
-          state.isAdmin
-            ? ''
-            : 'Available...'
-        }
+        {state.isAdmin ? '' : 'Available...'}
       </span>
     </div>
   )

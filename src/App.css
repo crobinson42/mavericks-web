@@ -35,3 +35,14 @@ div.overlay {
 .scene-container > .schedule {
   overflow: scroll;
 }
+
+.swal-button {
+  border-radius: 2px;
+  background-color: #72747c;
+  font-size: 14px;
+  border: 1px solid #9a846c;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
+.swal-footer {
+  text-align: center;
+}
