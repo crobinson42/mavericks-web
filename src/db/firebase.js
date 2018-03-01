@@ -23,7 +23,8 @@ export const handleAuthentication = authStateChangedHandler => {
   })
 
   firebase.auth().onAuthStateChanged(user => {
-    authStateChangedHandler(user)
+    if (user)
+      authStateChangedHandler(user)
   })
 }
 

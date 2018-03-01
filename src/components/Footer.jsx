@@ -42,7 +42,7 @@ class Footer extends React.Component {
                 Sign Out
               </a>
               {' '}|{' '}
-              <span className="">{process.env.REACT_APP_VERSION}</span>
+              <span className="">v{process.env.REACT_APP_VERSION}</span>
               {' '}|{' '}
               <span className="admin-login-button curser" onClick={this.showAdminLogin}>
               <i className="fa fa-cogs text-muted" /> Barber

@@ -1,6 +1,6 @@
 {
   "name": "mavericks-web",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "private": true,
   "dependencies": {
     "detect-browser": "^2.0.0",

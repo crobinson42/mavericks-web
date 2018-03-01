@@ -1,12 +1,11 @@
 import React from 'react'
 import { injectState } from 'freactal'
-import swal from 'sweetalert'
 
 import { setAppointment } from 'db/appointments'
 
 const setAppointmentHandler = params => {
   setAppointment(params)
-  swal("Nice! See you then.")
+  window.swal("Nice! See you then.")
 }
 
 const AvailableReservation = ({ state, stylist, time }) => {

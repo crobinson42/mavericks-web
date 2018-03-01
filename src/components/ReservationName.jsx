@@ -1,6 +1,5 @@
 import React from 'react'
 import { injectState } from 'freactal'
-import swal from 'sweetalert'
 
 import { removeAppointment } from 'db/appointments'
 import { fetchAndStreamUserById } from 'db/users'
@@ -27,12 +26,15 @@ class ReservationName extends React.Component {
       })
   }
 
-  clickHandler = () => {
+  clickHandler = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+
     if (!this.state.isThisUser && !this.props.state.isAdmin) return null
     // don't let a user see this modal if the appt is in the past
     else if (this.state.isThisUser && this.props.timeObject.valueOf() < new Date().getTime()) return null
 
-    swal({
+    window.swal({
       buttons: {
         confirm: "I'll be there!",
         cancelAppt: {

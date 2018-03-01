@@ -18,7 +18,7 @@ initReactFastclick()
 
 const browser = detect()
 
-switch (browser && browser.name) {
+switch ((browser && browser.name) || browser) {
   case 'ie':
   case 'opera':
     alert(
@@ -26,12 +26,25 @@ switch (browser && browser.name) {
     )
     break
   default:
-    console.info('browser:', browser.name)
+    console.info('browser:', browser && browser.name)
 }
 
 class App extends Component {
   componentDidMount() {
-    handleAuthentication(this.authStateChangeHandler)
+    setTimeout(() => {
+      if (this.props.state.loading || this.props.state.authenticationLoading) {
+        window.Raven.setExtraContext({
+          ...this.props
+        })
+        window.Raven.captureException('HANG_LOAD')
+      }
+    }, 10000)
+
+    try {
+      handleAuthentication(this.authStateChangeHandler)
+    } catch (e) {
+      window.Raven.captureException(e)
+    }
   }
 
   authStateChangeHandler = user => {
