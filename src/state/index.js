@@ -41,8 +41,6 @@ export default {
     setLoading: (effects, loading = true) => state => ({ ...state, loading }),
     setStylist: (effects, active = 'mike') => state => ({ ...state, active }),
     setUser: (effects, user) => state => {
-      effects.setAuthenticationLoading(false)
-
       return {
         ...state,
         authenticated: true,

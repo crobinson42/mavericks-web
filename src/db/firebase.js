@@ -17,6 +17,11 @@ window.firebase = firebase
 export const db = firebase.database()
 
 export const handleAuthentication = authStateChangedHandler => {
+  // there is a delay in Firebase auth() check regardless of previous auth status
+  setTimeout(() => {
+    if (!firebase.auth().currentUser) authStateChangedHandler(null)
+  }, 2000)
+
   firebase.auth().getRedirectResult().then((result) => {
     if (result.user)
       authStateChangedHandler(result.user)

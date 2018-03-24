@@ -56,6 +56,10 @@ class ReservationName extends React.Component {
     const { stylist, time } = this.props
 
     removeAppointment({ stylist, time })
+
+    window.gtag('event', 'reservation cancelled', {
+      event_category: 'reservations',
+    })
   }
 
   render() {

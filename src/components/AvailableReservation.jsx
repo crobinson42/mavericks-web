@@ -6,6 +6,9 @@ import { setAppointment } from 'db/appointments'
 const setAppointmentHandler = params => {
   setAppointment(params)
   window.swal("Nice! See you then.")
+  window.gtag('event', 'reservation set', {
+    event_category: 'reservations',
+  })
 }
 
 const AvailableReservation = ({ state, stylist, time }) => {

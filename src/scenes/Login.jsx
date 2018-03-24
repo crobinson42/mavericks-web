@@ -14,9 +14,40 @@ class Login extends Component {
   static propTypes = {}
 
   handleSignIn = provider => () => {
-    this.props.effects.setLoading()
+    this.props.effects.setAuthenticationLoading()
 
-    firebase.auth().signInWithPopup(providers[provider])
+    firebase
+      .auth()
+      .signInWithPopup(providers[provider])
+      .catch(e => {
+        window.gtag('event', 'signInWithPopup failed', {
+          event_category: 'auth',
+          event_label: 'provider',
+          value: provider,
+        })
+
+        window.Raven.setExtraContext({
+          ...this.props,
+        })
+        window.Raven.captureException('popup auth failed')
+
+        firebase
+          .auth()
+          .signInWithRedirect(providers[provider])
+          .catch(e => {
+            window.gtag('event', 'signInWithRedirect failed', {
+              event_category: 'auth',
+              event_label: 'provider',
+              value: provider,
+            })
+
+            window.Raven.captureException('redirect auth failed')
+
+            window.swal(
+              `Sorry...there's some kind of issue. We're working the kinks out, bare with us!`,
+            )
+          })
+      })
   }
 
   render() {
@@ -58,7 +89,10 @@ class Login extends Component {
           />
         </div>
 
-        <span className="text-small text-muted" style={{ bottom: 0, left: 0, position: 'fixed' }}>
+        <span
+          className="text-small text-muted"
+          style={{ bottom: 0, left: 0, position: 'fixed' }}
+        >
           {process.env.REACT_APP_VERSION}
         </span>
       </div>

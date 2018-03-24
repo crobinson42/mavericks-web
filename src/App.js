@@ -4,6 +4,7 @@ import { compose } from 'recompose'
 import Loadable from 'react-loading-overlay'
 import initReactFastclick from 'react-fastclick'
 import { detect } from 'detect-browser'
+import pckg from '../package.json'
 
 import { handleAuthentication } from './db/firebase'
 import { fetchAndStreamAppointments } from 'db/appointments'
@@ -13,6 +14,7 @@ import state from 'state'
 import Scene from 'scenes'
 
 import './App.css'
+import firebase from './db/firebase'
 
 initReactFastclick()
 
@@ -32,13 +34,28 @@ switch ((browser && browser.name) || browser) {
 class App extends Component {
   componentDidMount() {
     setTimeout(() => {
-      if (this.props.state.loading || this.props.state.authenticationLoading) {
+      if (
+        this.props.state.loading
+      ) {
         window.Raven.setExtraContext({
-          ...this.props
+          ...this.props,
+          version: pckg.version,
         })
+
+        window.gtag('event', 'load', {
+          'event_category': 'error',
+          'event_label': 'hang_load:' + (browser && browser.name),
+          'value': 'version:' + pckg.version,
+        })
+
         window.Raven.captureException('HANG_LOAD')
+
+        // An attempt at getting the user back to the sign-in screen
+        this.signout()
+        this.props.effects.setAuthenticationLoading(false)
+        this.props.effects.setLoading(false)
       }
-    }, 10000)
+    }, 20000)
 
     try {
       handleAuthentication(this.authStateChangeHandler)
@@ -61,6 +78,7 @@ class App extends Component {
       phone: user.phoneNumber,
     })
 
+    this.props.effects.setLoading(true)
     fetchAndStreamAppointments(this.appointmentsStreamHandler)
     fetchAndStreamAvailability(this.availabilityStreamHandler)
   }
@@ -75,6 +93,11 @@ class App extends Component {
     if (this.props.state.loading) this.props.effects.setLoading(false)
 
     this.props.effects.setAvailability(availability)
+  }
+
+  signout = () => {
+    this.props.effects.signOut()
+    firebase.auth().signOut()
   }
 
   render() {
