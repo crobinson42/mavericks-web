@@ -18,9 +18,9 @@ class Login extends Component {
 
     firebase
       .auth()
-      .signInWithPopup(providers[provider])
+      .signInWithRedirect(providers[provider])
       .catch(e => {
-        window.gtag('event', 'signInWithPopup failed', {
+        window.gtag('event', 'signInWithRedirect failed', {
           event_category: 'auth',
           event_label: 'provider',
           value: provider,
@@ -29,19 +29,19 @@ class Login extends Component {
         window.Raven.setExtraContext({
           ...this.props,
         })
-        window.Raven.captureException('popup auth failed')
+        window.Raven.captureException('redirect auth failed')
 
         firebase
           .auth()
-          .signInWithRedirect(providers[provider])
+          .signInWithPopup(providers[provider])
           .catch(e => {
-            window.gtag('event', 'signInWithRedirect failed', {
+            window.gtag('event', 'signInWithPopup failed', {
               event_category: 'auth',
               event_label: 'provider',
               value: provider,
             })
 
-            window.Raven.captureException('redirect auth failed')
+            window.Raven.captureException('popup auth failed')
 
             window.swal(
               `Sorry...there's some kind of issue. We're working the kinks out, bare with us!`,

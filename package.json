@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "detect-browser": "^2.0.0",
-    "firebase": "^4.9.1",
+    "firebase": "^4.12.0",
     "freactal": "^2.0.1",
     "js-joda": "^1.6.2",
     "luxon": "^0.4.0",
@@ -21,10 +21,11 @@
     "time-js": "0.0.5"
   },
   "scripts": {
-    "start": "REACT_APP_VERSION=$npm_package_version react-scripts start",
     "build": "REACT_APP_VERSION=$npm_package_version react-scripts build",
-    "test": "REACT_APP_VERSION=$npm_package_version react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "deploy": "npm run build && firebase deploy",
+    "eject": "react-scripts eject",
+    "start": "REACT_APP_VERSION=$npm_package_version react-scripts start",
+    "test": "REACT_APP_VERSION=$npm_package_version react-scripts test --env=jsdom"
   },
   "devDependencies": {
     "react-browser-support": "0.0.2"
