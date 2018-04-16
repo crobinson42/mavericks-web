@@ -22,7 +22,7 @@ ReactDOM.render(
   </AppErrorBoundery>,
   document.getElementById('root'),
 )
-registerServiceWorker()
+// registerServiceWorker()
 
 // make this global
 window.swal = swal
