@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 import App from './App'
 import AppErrorBoundery from './AppErrorBoundery'
-import registerServiceWorker from './registerServiceWorker'
+// import registerServiceWorker from './registerServiceWorker'
 
 import pckg from '../package.json'
 

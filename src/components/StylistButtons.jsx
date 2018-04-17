@@ -7,7 +7,7 @@ import './StylistButtons.css'
 
 const StylistButtons = ({ active, changeStylist }) => (
   <div className="d-inline-flex justify-content-center mb-3 w-100">
-    <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 m-0 p-0">
+    <div className="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 m-0 p-0">
       <div
         className={`btn-stylist ${active === 'mike' && 'active'}`}
         onClick={() => changeStylist('mike')}
@@ -16,14 +16,14 @@ const StylistButtons = ({ active, changeStylist }) => (
       </div>
     </div>
 
-    {/*<div className="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 m-0 p-0">*/}
-      {/*<div*/}
-        {/*className={`btn-stylist ${active === 'sadie' && 'active'}`}*/}
-        {/*onClick={() => changeStylist('sadie')}*/}
-      {/*>*/}
-        {/*Sadie*/}
-      {/*</div>*/}
-    {/*</div>*/}
+    <div className="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 m-0 p-0">
+      <div
+        className={`btn-stylist ${active === 'stephen' && 'active'}`}
+        onClick={() => changeStylist('stephen')}
+      >
+        Stephen
+      </div>
+    </div>
   </div>
 )
 
