@@ -9,7 +9,8 @@ import './TimeSlots.css'
 
 class TimeSlots extends React.Component {
   state = {
-    hours: []
+    hours: [],
+    loading: true,
   }
 
   componentDidMount() {
@@ -17,8 +18,21 @@ class TimeSlots extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, prevContext) {
-    if (prevProps.start !== this.props.start || prevProps.end !== this.props.end)
+    if (prevProps.start !== this.props.start || prevProps.end !== this.props.end) {
       this.updateHours()
+    }
+
+    if (prevProps.stylist !== this.props.stylist) {
+      this.setState({
+        loading: true,
+      }, () => {
+        setTimeout(() => {
+          this.setState({
+            loading: false,
+          })
+        }, 820)
+      })
+    }
   }
 
   updateHours = () => {
@@ -30,16 +44,17 @@ class TimeSlots extends React.Component {
     // create an array of hours
     const hours = new Array(end - start).fill('').map((val, i) => start + i)
 
-    this.setState({
-      hours,
-    })
+      this.setState({
+        hours,
+        loading: false,
+      });
   }
 
   render() {
     if (this.state.loading)
       return (
         <div className="row d-flex justify-content-center mb-5">
-          <Loading delay={0} color="grey" type="bars" width="80px" />
+          <Loading color="grey" height={200} type="bubbles" width={200} />
         </div>
       )
     else if (!this.state.hours.length) return <h3 className="text-center m-5">Not in today...</h3>

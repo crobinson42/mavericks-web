@@ -41,7 +41,7 @@ class Customer extends React.Component {
     const availabilityStart = stylistAvailability.start
 
     const humanDate = UDT(this.props.state.date).toFormat('cccc LLL d')
-
+    console.log('render', this.state.active)
     return (
       <div className="scene-container d-flex flex-column">
         <div className="mx-auto text-center">

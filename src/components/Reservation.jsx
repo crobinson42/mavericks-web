@@ -9,7 +9,6 @@ const Reservation = ({ reservation, state, stylist, time, timeObject }) => {
 
   let reservationSlot
 
-
   if (appointments[time])
     reservationSlot = <ReservationName stylist={stylist} time={time} timeObject={timeObject} userId={appointments[time]} />
   else if (timeObject.valueOf() > new Date().getTime())

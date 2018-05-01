@@ -14,7 +14,6 @@ import state from 'state'
 import Scene from 'scenes'
 
 import './App.css'
-import firebase from './db/firebase'
 
 initReactFastclick()
 
@@ -33,29 +32,10 @@ switch ((browser && browser.name) || browser) {
 
 class App extends Component {
   componentDidMount() {
-    setTimeout(() => {
-      if (
-        this.props.state.loading
-      ) {
-        window.Raven.setExtraContext({
-          ...this.props,
-          version: pckg.version,
-        })
-
-        window.gtag('event', 'load', {
-          'event_category': 'error',
-          'event_label': 'hang_load:' + (browser && browser.name),
-          'value': 'version:' + pckg.version,
-        })
-
-        window.Raven.captureException('HANG_LOAD')
-
-        // An attempt at getting the user back to the sign-in screen
-        this.signout()
-        this.props.effects.setAuthenticationLoading(false)
-        this.props.effects.setLoading(false)
-      }
-    }, 20000)
+    window.Raven.setExtraContext({
+      ...this.props,
+      version: pckg.version,
+    })
 
     try {
       handleAuthentication(this.authStateChangeHandler)
@@ -93,11 +73,6 @@ class App extends Component {
     if (this.props.state.loading) this.props.effects.setLoading(false)
 
     this.props.effects.setAvailability(availability)
-  }
-
-  signout = () => {
-    this.props.effects.signOut()
-    firebase.auth().signOut()
   }
 
   render() {
