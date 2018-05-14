@@ -4,16 +4,6 @@ import pckg from "../../package.json"
 
 export default {
   initialState: () => {
-    let LS
-    try {
-      LS = localStorage.getItem("mavcuts")
-      if (LS) LS = JSON.parse(LS)
-    } catch (e) {
-      console.error("LocalStorage.getItem error", e)
-    }
-
-    if (LS && LS.version && LS.version === pckg.version) return LS
-
     return {
       // appts for todays date
       appointments: null,
@@ -35,7 +25,7 @@ export default {
       // current user
       user: null,
       // because we persist state in localStorage we need to match versions in case of breaking changes
-      version: pckg.version,
+      version: pckg.version
     }
   },
   effects: {

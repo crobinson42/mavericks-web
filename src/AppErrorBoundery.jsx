@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from "react"
+
+import firebase from "db/firebase"
 
 class AppErrorBoundery extends Component {
   constructor(props) {
@@ -9,6 +11,11 @@ class AppErrorBoundery extends Component {
   componentDidCatch(error, errorInfo) {
     this.setState({ error })
     window.Raven.captureException(error, { extra: errorInfo })
+
+    // we want to kill a user session if they catch so they can re-auth
+    setTimeout(() => {
+      firebase.auth().signOut()
+    }, 2000)
   }
 
   render() {
@@ -17,7 +24,9 @@ class AppErrorBoundery extends Component {
         <div className="container">
           <div
             className="row my-5 text-danger"
-            onClick={() => window.Raven.lastEventId() && window.Raven.showReportDialog()}
+            onClick={() =>
+              window.Raven.lastEventId() && window.Raven.showReportDialog()
+            }
           >
             <p className="m-3">We're sorry — something's gone wrong.</p>
             <p className="m-3">

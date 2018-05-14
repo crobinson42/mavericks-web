@@ -33,11 +33,6 @@ export const handleAuthentication = authStateChangedHandler => {
   })
 }
 
-export const providers = {
-  google: new firebase.auth.GoogleAuthProvider(),
-  facebook: new firebase.auth.FacebookAuthProvider(),
-}
-
 /**
  * This listener is responsible for adding users
  * to the users db when someone authenticates.

@@ -1,6 +1,7 @@
 import React from 'react'
 import { DateTime } from 'luxon'
 import { injectState } from 'freactal'
+import { startCase } from 'lodash-es'
 
 import Loading from 'react-loading'
 import Reservation from './Reservation'
@@ -58,7 +59,7 @@ class TimeSlots extends React.Component {
           <Loading color="grey" height={200} type="bubbles" width={200} />
         </div>
       )
-    else if (!this.state.hours.length) return <h3 className="text-center m-5">Not in today...</h3>
+    else if (!this.state.hours.length) return <h3 className="text-center m-5">{startCase(this.props.stylist)}'s not in today...</h3>
 
     return this.state.hours.map(hour => {
       const time = DateTime.fromObject({ hour }).toFormat('h')

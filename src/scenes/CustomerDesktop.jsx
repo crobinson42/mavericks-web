@@ -24,6 +24,40 @@ class CustomerDesktop extends React.Component {
     }, 15 * 60000)
   }
 
+  renderStylistColumns = () => {
+    console.log('this.props.state.availability', this.props.state)
+    if (!this.props.state.availability) return <h3 className="d-flex justify-content-center my-5 w-100">There is nobody in the shop today</h3>
+
+      return Object.keys(this.props.state.availability).map(stylist => {
+        const appointments =
+          this.props.state.appointments &&
+          this.props.state.appointments[stylist]
+
+        let stylistAvailability =
+          this.props.state.availability &&
+          this.props.state.availability[stylist]
+        stylistAvailability =
+          (stylistAvailability && stylistAvailability[getDayOfWeek()]) || {}
+        const availabilityEnd = stylistAvailability.end
+        const availabilityStart = stylistAvailability.start
+
+        return (
+          <div className="schedule mx-auto" key={stylist}>
+            <div className="d-flex justify-content-center">
+              <h3>{startCase(stylist)}</h3>
+            </div>
+
+            <TimeSlots
+              appointments={appointments}
+              end={availabilityEnd}
+              stylist={stylist}
+              start={availabilityStart}
+            />
+          </div>
+        )
+      })
+  }
+
   render() {
     if (this.state.loading) return <Lodable active spinner text="Updating..." />
     const humanDate = UDT(this.props.state.date).toFormat("cccc LLL d")
@@ -47,36 +81,8 @@ class CustomerDesktop extends React.Component {
           </span>
         </div>
 
-        <div className="d-flex">
-          {Object.keys(this.props.state.availability).map(stylist => {
-              const appointments =
-                this.props.state.appointments &&
-                this.props.state.appointments[stylist]
-
-              let stylistAvailability =
-                this.props.state.availability &&
-                this.props.state.availability[stylist]
-              stylistAvailability =
-                (stylistAvailability && stylistAvailability[getDayOfWeek()]) || {}
-              const availabilityEnd = stylistAvailability.end
-              const availabilityStart = stylistAvailability.start
-
-              return (
-                <div className="schedule mx-auto" key={stylist}>
-                  <div className="d-flex justify-content-center">
-                    <h3>{startCase(stylist)}</h3>
-                  </div>
-
-                  <TimeSlots
-                    appointments={appointments}
-                    end={availabilityEnd}
-                    stylist={stylist}
-                    start={availabilityStart}
-                  />
-                </div>
-              )
-            })
-          }
+        <div className="d-flex" style={{ overflow: 'scroll' }}>
+          {this.renderStylistColumns()}
         </div>
 
         <Footer />

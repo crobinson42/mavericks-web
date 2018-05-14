@@ -1,6 +1,6 @@
 import React from 'react'
 import { injectState } from 'freactal'
-
+import sillyName from 'sillyname'
 import { removeAppointment } from 'db/appointments'
 import { fetchAndStreamUserById } from 'db/users'
 
@@ -15,9 +15,10 @@ class ReservationName extends React.Component {
 
   componentDidMount() {
     fetchAndStreamUserById(this.props.userId, user => {
+      const name = user.name || this.props.name || sillyName()
       this.setState({
         ...user,
-        name: this.props.name,
+        name,
       })
     })
 
