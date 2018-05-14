@@ -4,10 +4,18 @@ import { injectState } from 'freactal'
 import { setAppointment } from 'db/appointments'
 
 const setAppointmentHandler = params => {
-  setAppointment(params)
-  window.swal("Nice! See you then.")
-  window.gtag('event', 'reservation set', {
-    event_category: 'reservations',
+  window.swal("Name for the Appointment?", {
+    content: "input",
+  }).then((name) => {
+    if (!name) return
+
+    setAppointment({ ...params, name })
+
+    window.swal("Nice! See you then, " + name)
+
+    window.gtag('event', 'reservation set', {
+      event_category: 'reservations',
+    })
   })
 }
 

@@ -1,0 +1,14 @@
+input.code {
+    font-size: 24px;
+    width: 150px;
+}
+
+input.name {
+    font-size: 24px;
+    width: 275px;
+}
+
+input.phone {
+    font-size: 24px;
+    width: 275px;
+}

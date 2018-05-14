@@ -1,0 +1,6 @@
+{
+  "extends": ["eslint:recommended", "react", "prettier"],
+  "rules": {
+    "semi": 0
+  }
+}

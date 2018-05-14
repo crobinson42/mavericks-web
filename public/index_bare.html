@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://www.gstatic.com/firebasejs/5.0.1/firebase.js"></script>
+  </head>
+  <body>
+      Testing...
+      <div id="test"></div>
+
+      <script>
+        const config = {
+          apiKey: 'AIzaSyAdc0MpzD9C1rWUFqnb4WhGWQ2bdFJGEuo',
+          authDomain: 'mavericks-mens-hair.firebaseapp.com',
+          databaseURL: 'https://mavericks-mens-hair.firebaseio.com',
+          storageBucket: 'mavericks-mens-hair.appspot.com',
+        }
+
+        firebase.initializeApp(config)
+        firebase.storage()
+        firebase.database()
+        firebase.auth()
+        firebase.auth().onAuthStateChanged( user => console.log('user', user))
+      </script>
+  </body>
+</html>

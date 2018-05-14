@@ -29,12 +29,12 @@ export function fetchAndStreamAppointments(dataStreamHandler) {
   db.ref(`${DB_REF_PATHS.appointments}${getYearMonthDay()}`).on('value', snapshot => dataStreamHandler(snapshot.val()))
 }
 
-export function setAppointment({ date = getYearMonthDay(), stylist, time, userId }) {
-  if (!date || !stylist || !time) throw new Error('writeAppointment required params not met')
+export function setAppointment({ date = getYearMonthDay(), name, stylist, time, userId }) {
+  if (!date || !name || !stylist || !time) throw new Error('writeAppointment required params not met')
 
   db
     .ref(`${DB_REF_PATHS.appointments}${date}/${stylist}/${time}`)
-    .set(userId)
+    .set({ userId, name })
 }
 
 export function removeAppointment({ date = getYearMonthDay(), stylist, time }) {

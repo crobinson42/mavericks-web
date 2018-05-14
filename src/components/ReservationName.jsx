@@ -17,6 +17,7 @@ class ReservationName extends React.Component {
     fetchAndStreamUserById(this.props.userId, user => {
       this.setState({
         ...user,
+        name: this.props.name,
       })
     })
 
@@ -67,7 +68,7 @@ class ReservationName extends React.Component {
       ? 'alert alert-secondary'
       : ''
 
-    if (this.props.userId === null) return <div>unavailable...</div>
+    if (this.props.userId === null) return <div>Unavailable...</div>
 
     return (
       <div>

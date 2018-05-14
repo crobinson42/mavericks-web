@@ -9,7 +9,7 @@ const StylistButtons = ({ active, changeStylist }) => (
   <div className="d-inline-flex justify-content-center mb-3 w-100">
     <div className="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 m-0 p-0">
       <div
-        className={`btn-stylist ${active === 'mike' && 'active'}`}
+        className={`btn btn-stylist ${active === 'mike' && 'active'}`}
         onClick={() => changeStylist('mike')}
       >
         Mike
@@ -18,7 +18,7 @@ const StylistButtons = ({ active, changeStylist }) => (
 
     <div className="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 m-0 p-0">
       <div
-        className={`btn-stylist ${active === 'stephen' && 'active'}`}
+        className={`btn btn-stylist ${active === 'stephen' && 'active'}`}
         onClick={() => changeStylist('stephen')}
       >
         Stephen

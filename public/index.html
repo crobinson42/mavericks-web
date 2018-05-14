@@ -5,15 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes, user-scalable=no">
     <meta name="theme-color" content="#cecece">
 
-    <link rel="shortcut icon" type="image/png" href="/img/ios-appicon-180x180.png">
-    <link rel="shortcut icon" sizes="192x192" href="/img/icon-launchericon-192x192.png">
     <link rel="apple-touch-icon" href="/img/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/img/ios-appicon-152-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/ios-appicon-180x180.png">
+    <!--IOS Splash screen-->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-startup-image" href="/img/iOS/LaunchImage.launchimage/LaunchImage~iphone-320x480.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/img/iOS/LaunchImage.launchimage/LaunchImage~iphone-320x480.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/img/iOS/LaunchImage.launchimage/LaunchImage~iphone_640x960.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/img/iOS/LaunchImage.launchimage/LaunchImage~iphone-320x480.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/img/iOS/LaunchImage.launchimage/LaunchImage-750@2x~iphone6-portrait_750x1334.png" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/img/iOS/LaunchImage.launchimage/LaunchImage-750@2x~iphone6-portrait_750x1334.png" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="/img/iOS/LaunchImage.launchimage/LaunchImage-1242@3x~iphone6s-portrait_1242x2208.png" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+
 
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-    <!--<link rel="manifest" href="%PUBLIC_URL%/manifest.json">-->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -26,16 +36,15 @@
     -->
     <title>Mav's</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap-reboot.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap-reboot.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/darkly/bootstrap.min.css">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-
-    <script src="https://cdn.ravenjs.com/3.22.2/raven.min.js"
-            crossorigin="anonymous"></script>
+    <script src="https://cdn.ravenjs.com/3.22.2/raven.min.js"></script>
+    <script src="https://unpkg.com/jquery-mask-plugin@1.14.15/dist/jquery.mask.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
   </head>
   <body>
@@ -43,8 +52,7 @@
       You need to enable JavaScript to run this app.
     </noscript>
     <div class="bg-image"></div>
-
-    <div id="root"></div>
+    <div id="root"> </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -66,8 +74,8 @@
         midnight.setMinutes(59)
         midnight.setSeconds(59)
 
-        // add 5 minutes for padding in case client time is slightly offset
-        var milliUntilMidnight = (midnight.getTime() - milliNow) + (5 * 60000)
+        // add 20 minutes for padding in case client time is slightly offset
+        var milliUntilMidnight = (midnight.getTime() - milliNow) + (20 * 60000)
 
         setTimeout(function () {
           window.location.reload()

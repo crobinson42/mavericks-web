@@ -38,8 +38,9 @@ class TimeSlots extends React.Component {
   updateHours = () => {
     const { end, start } = this.props
 
+
     // no hours
-    if (!start || !end) return this.setState({ hours: [] })
+    if (!start || !end) return this.setState({ hours: [], loading: false, })
 
     // create an array of hours
     const hours = new Array(end - start).fill('').map((val, i) => start + i)
