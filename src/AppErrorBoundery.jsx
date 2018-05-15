@@ -16,6 +16,10 @@ class AppErrorBoundery extends Component {
     setTimeout(() => {
       firebase.auth().signOut()
     }, 2000)
+
+    if (confirm('The was some kind of error, do you want to reload?')) {
+      window.location.reload()
+    }
   }
 
   render() {
