@@ -1,20 +1,21 @@
-import React from 'react'
-import { injectState } from 'freactal'
+import React from "react"
+import { injectState } from "freactal"
 
-import { getDayOfWeek } from 'utils/date'
+import { getDayOfWeek } from "utils/date"
 
-import Lodable from 'react-loading-overlay'
-import Footer from 'components/Footer'
-import logo from 'images/logo.png'
-import StylistButtons from 'components/StylistButtons'
-import TimeSlots from 'components/TimeSlots'
-import { UDT } from 'utils/date'
+import Lodable from "react-loading-overlay"
+import Footer from "components/Footer"
+import logo from "images/logo.png"
+import PickStylist from "components/PickStylist"
+import StylistButtons from "components/StylistButtons"
+import TimeSlots from "components/TimeSlots"
+import { UDT } from "utils/date"
 
-import './Customer.css'
+import "./Customer.css"
 
 class CustomerMobile extends React.Component {
   state = {
-    loading: false,
+    loading: false
   }
 
   componentDidMount() {
@@ -26,6 +27,7 @@ class CustomerMobile extends React.Component {
 
   render() {
     if (this.state.loading) return <Lodable active spinner text="Updating..." />
+    else if (!this.props.state.active) return <PickStylist />
 
     const appointments =
       this.props.state.appointments &&
@@ -39,7 +41,7 @@ class CustomerMobile extends React.Component {
     const availabilityEnd = stylistAvailability.end
     const availabilityStart = stylistAvailability.start
 
-    const humanDate = UDT(this.props.state.date).toFormat('cccc LLL d')
+    const humanDate = UDT(this.props.state.date).toFormat("cccc LLL d")
 
     return (
       <div className="scene-container d-flex flex-column">
@@ -48,18 +50,14 @@ class CustomerMobile extends React.Component {
             <img
               alt=""
               src={logo}
-              style={{ maxHeight: '100px', marginTop: '.5rem' }}
+              style={{ maxHeight: "100px", marginTop: ".5rem" }}
             />
           </div>
 
           <span>
             <div className="brand-name">Maverick's</div>
             <div className="text-small text-muted">
-              <em>
-                Claim the chair for today,
-                {' '}
-                {humanDate}
-              </em>
+              <em>Claim the chair for today, {humanDate}</em>
             </div>
           </span>
         </div>

@@ -4,6 +4,14 @@ import pckg from "../../package.json"
 
 export default {
   initialState: () => {
+    let LS
+
+    try {
+      LS = JSON.parse(localStorage.getItem('mavcuts-1'))
+    } catch (e) {
+      console.error('localStorage error with .getItem()', e)
+    }
+
     return {
       // appts for todays date
       appointments: null,
@@ -13,7 +21,7 @@ export default {
       authenticationLoading: true,
       // availability
       availability: null,
-      active: "mike",
+      active: (LS && LS.active) || null,
       date: getYearMonthDay(),
       dayOfWeek: getDayOfWeek(),
       // if the current user is in admin mode
@@ -48,7 +56,7 @@ export default {
     setDate: (effects, date) => state => ({ ...state, date }),
     setLoading: (effects, loading = true) => state => ({ ...state, loading }),
     setName: (effects, name) => state => ({ ...state, name }),
-    setStylist: (effects, active = "mike") => state => ({ ...state, active }),
+    setStylist: (effects, active) => state => ({ ...state, active }),
     sentText: (effects, sent = true) => state => ({ ...state, sentText: sent }),
     setUser: (effects, user) => state => {
       return {

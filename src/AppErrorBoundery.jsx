@@ -17,6 +17,7 @@ class AppErrorBoundery extends Component {
       firebase.auth().signOut()
     }, 2000)
 
+    // eslint-disable-next-line
     if (confirm('The was some kind of error, do you want to reload?')) {
       window.location.reload()
     }

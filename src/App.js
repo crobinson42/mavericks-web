@@ -45,7 +45,7 @@ class App extends Component {
   componentDidUpdate() {
     // save all state changes to localStorage
     try {
-      localStorage.setItem("mavcuts", JSON.stringify(this.props.state))
+      localStorage.setItem("mavcuts-1", JSON.stringify(this.props.state))
     } catch (e) {
       console.error("LocalStorage.setItem error", e)
     }

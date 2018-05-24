@@ -25,7 +25,6 @@ class CustomerDesktop extends React.Component {
   }
 
   renderStylistColumns = () => {
-    console.log('this.props.state.availability', this.props.state)
     if (!this.props.state.availability) return <h3 className="d-flex justify-content-center my-5 w-100">There is nobody in the shop today</h3>
 
       return Object.keys(this.props.state.availability).map(stylist => {
