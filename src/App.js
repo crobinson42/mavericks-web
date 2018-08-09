@@ -42,7 +42,12 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
+    if (prevProps.state.date !== this.props.state.date) {
+      this.props.effects.setLoading(true)
+      fetchAndStreamAppointments(this.appointmentsStreamHandler, this.props.state.date)
+    }
+
     // save all state changes to localStorage
     try {
       localStorage.setItem("mavcuts-1", JSON.stringify(this.props.state))
@@ -72,6 +77,7 @@ class App extends Component {
 
   appointmentsStreamHandler = appts => {
     this.props.effects.setAppointments(appts)
+    this.props.effects.setLoading(false)
   }
 
   availabilityStreamHandler = availability => {

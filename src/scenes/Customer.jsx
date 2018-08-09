@@ -1,9 +1,9 @@
 import React, { Component } from "react"
+import { injectState } from "freactal"
 import CustomerDesktop from "./CustomerDesktop"
 import CustomerMobile from "./CustomerMobile"
 
 class Customer extends Component {
-
   componentDidMount() {
     window.addEventListener("resize", this.handleResize, false)
   }
@@ -25,4 +25,4 @@ class Customer extends Component {
   }
 }
 
-export default Customer
+export default injectState(Customer)

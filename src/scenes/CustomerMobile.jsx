@@ -3,6 +3,7 @@ import { injectState } from "freactal"
 
 import { getDayOfWeek } from "utils/date"
 
+import DateNavControls from "./components/DateNavControls"
 import Lodable from "react-loading-overlay"
 import Footer from "components/Footer"
 import logo from "images/logo.png"
@@ -45,6 +46,8 @@ class CustomerMobile extends React.Component {
 
     return (
       <div className="scene-container d-flex flex-column">
+        {this.props.state.isAdmin && <DateNavControls />}
+
         <div className="mx-auto text-center">
           <div className="logo-container">
             <img

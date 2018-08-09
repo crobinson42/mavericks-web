@@ -18,19 +18,53 @@
  * }
  */
 
-import { db } from 'db/firebase'
-import DB_REF_PATHS from './db_ref_paths'
-import { getYearMonthDay } from 'utils/date'
+import { db } from "db/firebase"
+import DB_REF_PATHS from "./db_ref_paths"
+import { getYearMonthDay } from "utils/date"
 
-export function fetchAndStreamAppointments(dataStreamHandler) {
-  if (!dataStreamHandler) throw new Error('fetchAndStreamAppointments requires a handler')
+export function fetchAndStreamAppointments(
+  dataStreamHandler,
+  yearMonthDay = getYearMonthDay()
+) {
+  if (!dataStreamHandler)
+    throw new Error("fetchAndStreamAppointments requires a handler")
 
   // by default only fetch and streams todays date appts
-  db.ref(`${DB_REF_PATHS.appointments}${getYearMonthDay()}`).on('value', snapshot => dataStreamHandler(snapshot.val()))
+  db
+    .ref(`${DB_REF_PATHS.appointments}${yearMonthDay}`)
+    .on("value", snapshot => dataStreamHandler(snapshot.val()))
 }
 
-export function setAppointment({ date = getYearMonthDay(), name, stylist, time, userId }) {
-  if (!date || !name || !stylist || !time) throw new Error('writeAppointment required params not met')
+export function fetchAndStreamAppointmentByDateBarberTime(
+  dataStreamHandler,
+  yearMonthDay = getYearMonthDay(),
+  stylist,
+  time
+) {
+  if (!dataStreamHandler)
+    throw new Error(
+      "fetchAndStreamAppointmentByDateBarberTime requires a handler"
+    )
+
+  // by default only fetch and streams todays date appts
+  db
+    .ref(`${DB_REF_PATHS.appointments}${yearMonthDay}/${stylist}/${time}`)
+    .on("value", snapshot => dataStreamHandler(snapshot.val()))
+}
+
+export function setAppointment({
+  date = getYearMonthDay(),
+  name,
+  stylist,
+  time,
+  userId
+}) {
+  if (!date || !name || !stylist || !time)
+    throw new Error("writeAppointment required params not met")
+
+  console.log(
+    `setAppointment(), ${DB_REF_PATHS.appointments}${date}/${stylist}/${time}`
+  )
 
   db
     .ref(`${DB_REF_PATHS.appointments}${date}/${stylist}/${time}`)
@@ -38,9 +72,20 @@ export function setAppointment({ date = getYearMonthDay(), name, stylist, time, 
 }
 
 export function removeAppointment({ date = getYearMonthDay(), stylist, time }) {
-	if (!date || !stylist || !time) throw new Error('removeAppointment required params not met')
+  if (!date || !stylist || !time)
+    throw new Error("removeAppointment required params not met")
+
+  console.log(
+    `removeAppointment(), ${
+      DB_REF_PATHS.appointments
+    }${date}/${stylist}/${time}`
+  )
 
   db
     .ref(`${DB_REF_PATHS.appointments}${date}/${stylist}/${time}`)
     .remove()
+    .catch(err => {
+      console.log("err", err)
+    })
+    .then(data => console.log("delted", data))
 }

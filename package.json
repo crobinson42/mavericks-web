@@ -37,6 +37,8 @@
     "test": "REACT_APP_VERSION=$npm_package_version react-scripts test --env=jsdom"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.6",
+    "eslint-plugin-flowtype": "^2.50.0",
     "react-browser-support": "0.0.2"
   }
 }

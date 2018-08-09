@@ -2,6 +2,15 @@ import React, { Component } from 'react'
 import { injectState } from 'freactal'
 
 class AdminLogin extends Component {
+  componentDidMount() {
+    try {
+      this.checkPassword({ target: { value: this.input.value }})
+    } catch (e) {
+      console.warn('AdminLogin',)
+    }
+  }
+
+
   checkPassword = e => {
     if (e.target.value !== 'iforgotthepassword') return
 
@@ -33,6 +42,7 @@ class AdminLogin extends Component {
                   className="form-control"
                   placeholder="Super Secret Password"
                   onKeyUp={this.checkPassword}
+                  ref={el => this.input = el}
                 />
               </div>
             </div>

@@ -1,12 +1,13 @@
 import React from "react"
 import { injectState } from "freactal"
-import { startCase } from 'lodash-es'
+import { startCase } from "lodash-es"
 import { getDayOfWeek } from "utils/date"
 
 import Lodable from "react-loading-overlay"
 import Footer from "components/Footer"
 import logo from "images/logo.png"
 
+import DateNavControls from "./components/DateNavControls"
 import TimeSlots from "components/TimeSlots"
 import { UDT } from "utils/date"
 
@@ -25,36 +26,39 @@ class CustomerDesktop extends React.Component {
   }
 
   renderStylistColumns = () => {
-    if (!this.props.state.availability) return <h3 className="d-flex justify-content-center my-5 w-100">There is nobody in the shop today</h3>
+    if (!this.props.state.availability)
+      return (
+        <h3 className="d-flex justify-content-center my-5 w-100">
+          There is nobody in the shop today
+        </h3>
+      )
 
-      return Object.keys(this.props.state.availability).map(stylist => {
-        const appointments =
-          this.props.state.appointments &&
-          this.props.state.appointments[stylist]
+    return Object.keys(this.props.state.availability).map(stylist => {
+      const appointments =
+        this.props.state.appointments && this.props.state.appointments[stylist]
 
-        let stylistAvailability =
-          this.props.state.availability &&
-          this.props.state.availability[stylist]
-        stylistAvailability =
-          (stylistAvailability && stylistAvailability[getDayOfWeek()]) || {}
-        const availabilityEnd = stylistAvailability.end
-        const availabilityStart = stylistAvailability.start
+      let stylistAvailability =
+        this.props.state.availability && this.props.state.availability[stylist]
+      stylistAvailability =
+        (stylistAvailability && stylistAvailability[getDayOfWeek()]) || {}
+      const availabilityEnd = stylistAvailability.end
+      const availabilityStart = stylistAvailability.start
 
-        return (
-          <div className="schedule mx-auto" key={stylist}>
-            <div className="d-flex justify-content-center">
-              <h3>{startCase(stylist)}</h3>
-            </div>
-
-            <TimeSlots
-              appointments={appointments}
-              end={availabilityEnd}
-              stylist={stylist}
-              start={availabilityStart}
-            />
+      return (
+        <div className="schedule mx-auto" key={stylist}>
+          <div className="d-flex justify-content-center">
+            <h3>{startCase(stylist)}</h3>
           </div>
-        )
-      })
+
+          <TimeSlots
+            appointments={appointments}
+            end={availabilityEnd}
+            stylist={stylist}
+            start={availabilityStart}
+          />
+        </div>
+      )
+    })
   }
 
   render() {
@@ -63,6 +67,8 @@ class CustomerDesktop extends React.Component {
 
     return (
       <div className="scene-container d-flex flex-column">
+        {this.props.state.isAdmin && <DateNavControls />}
+
         <div className="mx-auto text-center">
           <div className="logo-container">
             <img
@@ -80,7 +86,7 @@ class CustomerDesktop extends React.Component {
           </span>
         </div>
 
-        <div className="d-flex" style={{ overflow: 'scroll' }}>
+        <div className="d-flex" style={{ overflow: "scroll" }}>
           {this.renderStylistColumns()}
         </div>
 

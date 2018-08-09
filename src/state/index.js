@@ -1,4 +1,4 @@
-import { getDayOfWeek, getYearMonthDay } from "../utils/date"
+import { getDayOfWeek, getYearMonthDay,  nextDayFromDate, previousDayFromDate, } from "../utils/date"
 
 import pckg from "../../package.json"
 
@@ -37,6 +37,17 @@ export default {
     }
   },
   effects: {
+    changeDatePrevious: effects => state => {
+      console.log('previousDayFromDate(state.date)', previousDayFromDate(state.date))
+      return ({
+        ...state,
+        date: previousDayFromDate(state.date),
+      })
+    },
+    changeDateNext: effects => state => ({
+      ...state,
+      date: nextDayFromDate(state.date),
+    }),
     setAdmin: effects => state => ({
       ...state,
       isAdmin: true
