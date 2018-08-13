@@ -40,7 +40,7 @@ class CustomerDesktop extends React.Component {
       let stylistAvailability =
         this.props.state.availability && this.props.state.availability[stylist]
       stylistAvailability =
-        (stylistAvailability && stylistAvailability[getDayOfWeek()]) || {}
+        (stylistAvailability && stylistAvailability[getDayOfWeek(this.props.state.date)]) || {}
       const availabilityEnd = stylistAvailability.end
       const availabilityStart = stylistAvailability.start
 

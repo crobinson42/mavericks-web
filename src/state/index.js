@@ -38,7 +38,6 @@ export default {
   },
   effects: {
     changeDatePrevious: effects => state => {
-      console.log('previousDayFromDate(state.date)', previousDayFromDate(state.date))
       return ({
         ...state,
         date: previousDayFromDate(state.date),

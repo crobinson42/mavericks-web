@@ -38,7 +38,7 @@ class CustomerMobile extends React.Component {
       this.props.state.availability &&
       this.props.state.availability[this.props.state.active]
     stylistAvailability =
-      (stylistAvailability && stylistAvailability[getDayOfWeek()]) || {}
+      (stylistAvailability && stylistAvailability[getDayOfWeek(this.props.state.date)]) || {}
     const availabilityEnd = stylistAvailability.end
     const availabilityStart = stylistAvailability.start
 

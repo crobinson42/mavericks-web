@@ -4,8 +4,8 @@ import { DateTime } from 'luxon'
 const LUXON_DATE_FORMAT = 'yLLdd'
 
 // 1 is monday 7 is sunday
-export function getDayOfWeek() {
-  return UDT().toFormat('c')
+export function getDayOfWeek(date) {
+  return UDT(date).toFormat('c')
 }
 
 // return todays date, 20180208 = YYYYMMDD
@@ -29,7 +29,7 @@ export function previousDayFromDate(date) {
   }
 }
 
-window.dt=  DateTime
+window.dt = DateTime
 
 // the timezone for the store
 export const storeTZ = 'America/Los_Angeles'
