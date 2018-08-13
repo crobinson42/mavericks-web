@@ -6,7 +6,7 @@ class AdminLogin extends Component {
     try {
       this.checkPassword({ target: { value: this.input.value }})
     } catch (e) {
-      console.warn('AdminLogin',)
+      console.warn('AdminLogin', e)
     }
   }
 
