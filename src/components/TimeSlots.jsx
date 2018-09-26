@@ -39,7 +39,6 @@ class TimeSlots extends React.Component {
   updateHours = () => {
     const { end, start } = this.props
 
-
     // no hours
     if (!start || !end) return this.setState({ hours: [], loading: false, })
 
@@ -59,7 +58,7 @@ class TimeSlots extends React.Component {
           <Loading color="grey" height={200} type="bubbles" width={200} />
         </div>
       )
-    else if (!this.state.hours.length) return <h3 className="text-center m-5">{startCase(this.props.stylist)}'s not in today...</h3>
+    else if (!this.state.hours.length) return null
 
     return this.state.hours.map(hour => {
       const time = DateTime.fromObject({ hour }).toFormat('h')
@@ -82,10 +81,10 @@ class TimeSlots extends React.Component {
 
           <div className="d-flex time-slot-row">
             <div className="time">
-              {timeHalf}
+              {this.props.stylist !== 'jake' && timeHalf}
             </div>
 
-            <Reservation stylist={this.props.stylist} time={timeHalf} timeObject={timeHalfObject} />
+            {this.props.stylist !== 'jake' && <Reservation stylist={this.props.stylist} time={timeHalf} timeObject={timeHalfObject} />}
           </div>
         </div>
       )

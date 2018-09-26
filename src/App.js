@@ -54,6 +54,8 @@ class App extends Component {
     } catch (e) {
       console.error("LocalStorage.setItem error", e)
     }
+
+    window.state = this.props.state
   }
 
   authStateChangeHandler = user => {

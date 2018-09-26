@@ -34,6 +34,12 @@ class CustomerDesktop extends React.Component {
       )
 
     return Object.keys(this.props.state.availability).map(stylist => {
+      const stylistToday =
+        this.props.state.availability[stylist][getDayOfWeek(this.props.state.date)] || {}
+      const isAvailableToday = Boolean(stylistToday.start && stylistToday.end)
+      
+      if (!isAvailableToday) return null
+
       const appointments =
         this.props.state.appointments && this.props.state.appointments[stylist]
 
