@@ -81,10 +81,10 @@ class TimeSlots extends React.Component {
 
           <div className="d-flex time-slot-row">
             <div className="time">
-              {this.props.stylist !== 'jake' && timeHalf}
+              {timeHalf}
             </div>
 
-            {this.props.stylist !== 'jake' && <Reservation stylist={this.props.stylist} time={timeHalf} timeObject={timeHalfObject} />}
+            <Reservation stylist={this.props.stylist} time={timeHalf} timeObject={timeHalfObject} />
           </div>
         </div>
       )
