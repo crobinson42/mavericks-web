@@ -6,6 +6,7 @@ import firebase from "db/firebase"
 
 import "./Login.css"
 import logo from "images/logo.png"
+import GoogleMapIcon from "images/google-maps.png"
 
 class Login extends Component {
   static propTypes = {}
@@ -28,6 +29,11 @@ class Login extends Component {
         // mobile safari bug
       }
     }, 1500)
+  }
+
+  handleGoogleMapClick = () => {
+    const win = window.open('https://goo.gl/maps/WV8JgaYKcKs', '_blank')
+    win.focus()
   }
 
   validatePhoneInput = e => {
@@ -172,7 +178,7 @@ class Login extends Component {
   render() {
     return (
       <div className="m-5">
-        <div className="col mx-auto my-5 text-center">
+        <div className="align-items-center col d-flex flex-column justify-content-center mx-auto my-5 text-center">
           <img
             alt=""
             className="d-inline-flex"
@@ -183,6 +189,11 @@ class Login extends Component {
           <div>
             <p>Open Mon-Fri 10-6pm, Sat 10-3pm</p>
             <p>418 E. Lakeside, Coeur d’Alene, Id</p>
+          </div>
+
+          <div className="my-2 p-3" style={{ background: 'rgba(255,255,255,0.1)', border: 'solid 3px white', cursor: 'pointer', width: '150px'}} onClick={this.handleGoogleMapClick}>
+            <img src={GoogleMapIcon} />
+            <h4 className="my-2">Need Directions?</h4>
           </div>
 
           <div>
