@@ -79,6 +79,10 @@ export default {
       ...state,
       authenticated: false,
       user: null
+    }),
+    signOutAdmin: effects => state => ({
+      ...state,
+      isAdmin: false,
     })
   }
 }

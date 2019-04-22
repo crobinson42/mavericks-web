@@ -25,7 +25,7 @@ class Footer extends React.Component {
   }
 
   render() {
-    const { effects: { signOut } } = this.props
+    const { effects: { signOut, signOutAdmin }, state: { isAdmin } } = this.props
 
     return (
       <div>
@@ -44,7 +44,7 @@ class Footer extends React.Component {
               {' '}|{' '}
               <span className="">v{process.env.REACT_APP_VERSION}</span>
               {' '}|{' '}
-              <span className="admin-login-button curser" onClick={this.showAdminLogin}>
+              <span className="admin-login-button curser" onClick={!isAdmin ? this.showAdminLogin : signOutAdmin }>
               <i className="fa fa-cogs text-muted" /> Barber
             </span>
             </div>

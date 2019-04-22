@@ -1,6 +1,7 @@
 .footer {
     color: lightgrey !important;
     font-size: 85%;
+    margin-bottom: 1.5em;
     opacity: .3;
 }
 

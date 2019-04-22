@@ -1,7 +1,7 @@
 {
   "name": "mavericks-web",
   "homepage": "https://mavcuts.com",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "private": true,
   "dependencies": {
     "detect-browser": "^2.4.0",
