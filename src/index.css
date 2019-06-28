@@ -4,7 +4,7 @@ html {
 }
 
 html, body {
-  background: rgb(39, 43, 56);
+  background: rgba(0, 0, 0, 0.6);
   font-family: sans-serif;
   height: 100%;
   margin: 0;
@@ -23,6 +23,7 @@ html, body {
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: -1;
 }
 
 #root {

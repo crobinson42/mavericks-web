@@ -25,11 +25,12 @@ export default {
       date: getYearMonthDay(),
       dayOfWeek: getDayOfWeek(),
       // if the current user is in admin mode
-      isAdmin: false,
+      isAdmin: !false,
       // initial app state while fetching data
       loading: true,
       // keep login state here so when reopening window up they can input a txt msg code
       sentText: false,
+      showSchedule: !false, // show the schedule scene
       // current user
       user: null,
       // because we persist state in localStorage we need to match versions in case of breaking changes
@@ -47,6 +48,10 @@ export default {
       ...state,
       date: nextDayFromDate(state.date),
     }),
+    navToSchedule: (effects, goTo = false) => state => ({
+      ...state,
+      showSchedule: Boolean(goTo),
+    }),
     setAdmin: effects => state => ({
       ...state,
       isAdmin: true
@@ -61,7 +66,16 @@ export default {
     ) => state => ({ ...state, authenticationLoading }),
     setAvailability: (effects, availability) => state => ({
       ...state,
-      availability
+      // esnure we always have a key=>value Map bcus Firebase quark will give array if we use Int as keys in an object
+      availability: Object.entries(availability).reduce((acc, kv) => {
+        acc[kv[0]] = Array.isArray(kv[1]) ? kv[1].reduce((acc, v, index) => {
+          acc[index] = v
+
+          return acc
+        }, {}) : kv[1]
+
+        return acc
+      }, {})
     }),
     setDate: (effects, date) => state => ({ ...state, date }),
     setLoading: (effects, loading = true) => state => ({ ...state, loading }),

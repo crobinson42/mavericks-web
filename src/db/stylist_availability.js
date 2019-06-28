@@ -32,10 +32,10 @@ export function fetchAndStreamAvailability(dataStreamHandler) {
   db.ref(DB_REF_PATH.stylistAvailability).on('value', snapshot => dataStreamHandler(snapshot.val()))
 }
 
-export function writeAvailability({ availabilityObject = {}, stylist }) {
-  if (!stylist) throw new Error('writeAvailability required params not met')
+export function writeAvailability({ availabilityObject }) {
+  if (!availabilityObject) throw new Error('writeAvailability required param not met')
 
   db
-    .ref(`${DB_REF_PATH.stylistAvailability}${stylist}`)
+    .ref(`${DB_REF_PATH.stylistAvailability}`)
     .set(availabilityObject)
 }

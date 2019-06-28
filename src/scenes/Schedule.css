@@ -1,0 +1,10 @@
+.schedule-container {
+    height: 100vh;
+    overflow: scroll;
+    position: fixed;
+    width: 100vw;
+}
+
+.start-end-time {
+    width: 75px;
+}

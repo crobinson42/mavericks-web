@@ -45,7 +45,10 @@ class App extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.state.date !== this.props.state.date) {
       this.props.effects.setLoading(true)
-      fetchAndStreamAppointments(this.appointmentsStreamHandler, this.props.state.date)
+      fetchAndStreamAppointments(
+        this.appointmentsStreamHandler,
+        this.props.state.date
+      )
     }
 
     // save all state changes to localStorage
@@ -86,7 +89,6 @@ class App extends Component {
     // The first availability response from the stream
     // will remove loading state on the component
     if (this.props.state.loading) this.props.effects.setLoading(false)
-
     this.props.effects.setAvailability(availability)
   }
 
@@ -95,12 +97,19 @@ class App extends Component {
       return <Loadable active spinner text="Checking who you are..." />
     } else if (this.props.state.loading) {
       return <Loadable active spinner text="Hang tight..." />
-    } else if (this.props.state.authenticated) return <Scene.Customer />
+    } else if (this.props.state.isAdmin && this.props.state.showSchedule)
+      return <Scene.Schedule />
+    else if (this.props.state.authenticated) return <Scene.Customer />
 
     return <Scene.Login />
   }
 }
 
 const enhance = compose(provideState(state))
+
+// eslint-disable-next-line
+if (module.hot) {
+  module.hot.accept();
+}
 
 export default enhance(injectState(App), Object.keys(state.initialState()))
