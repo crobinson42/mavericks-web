@@ -12,7 +12,7 @@ class AdminLogin extends Component {
 
 
   checkPassword = e => {
-    if (e.target.value !== 'iforgotthepassword') return
+    if (e.target.value !== 'ichangedthepassword') return
 
     this.props.effects.setAdmin()
     this.props.closeHandler()
