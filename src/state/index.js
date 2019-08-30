@@ -25,12 +25,12 @@ export default {
       date: getYearMonthDay(),
       dayOfWeek: getDayOfWeek(),
       // if the current user is in admin mode
-      isAdmin: !false,
+      isAdmin: false,
       // initial app state while fetching data
       loading: true,
       // keep login state here so when reopening window up they can input a txt msg code
       sentText: false,
-      showSchedule: !false, // show the schedule scene
+      showSchedule: false, // show the schedule scene
       // current user
       user: null,
       // because we persist state in localStorage we need to match versions in case of breaking changes
