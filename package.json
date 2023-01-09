@@ -15,7 +15,7 @@
     "freactal": "^2.0.3",
     "js-joda": "^1.11.0",
     "lodash-es": "^4.17.11",
-    "luxon": "^1.16.0",
+    "luxon": "^2.5.2",
     "object-diff": "0.0.4",
     "platform": "^1.3.5",
     "react": "^16.8.6",
